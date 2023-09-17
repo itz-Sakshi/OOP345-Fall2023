@@ -1,0 +1,35 @@
+Command Line:
+--------------------------
+  1: ws
+  2: rides1.txt
+  3: rides2.txt
+--------------------------
+
+--------------------
+    Day 1
+--------------------
+Name          |Ride Description         |Price w/ Tax|Price with Discount
+1 . Jack      |North York               |10.16       |
+2 . Julian    |Mississauga              |9.03        |         7.88
+3 . Susan     |East York                |8.58        |
+4 . John      |Scarborough              |7.90        |         6.75
+5 . Nika      |Thornhill                |6.77        |
+--------------------
+    Day 2
+--------------------
+Name          |Ride Description         |Price w/ Tax|Price with Discount
+6 . Emily     |Danforth                 |12.53       |        11.33
+7 . Ali       |Broadview                |14.81       |
+8 . Marry     |Pape                     |9.79        |         8.59
+9 . Mike      |Donalds                  |6.26        |
+10. Kate      |Woodbine                 |6.83        |         5.63
+11. No Ride Request
+--------------------
+Recorded Home Ride Orders
+--------------------
+Name          |Ride Description         |Price w/ Tax|Price with Discount
+12. Susan     |East York                |8.65        |
+13. Nika      |Thornhill                |6.83        |
+14. Ali       |Broadview                |14.81       |
+15. Marry     |Pape                     |9.79        |         8.59
+--------------------
