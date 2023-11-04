@@ -1,0 +1,31 @@
+*****************************************************************************
+                               Reflection
+Full Name  :  Sakshi Sakshi
+Student ID#:  102602222
+
+Authenticity Declaration:
+I declare this submission is the result of my own work and has not been
+shared with any other student or 3rd party content provider. This submitted
+piece of work is entirely of my own creation.
+*****************************************************************************
+
+Q. In reflection, explain why it was necessary for you to add the members that you added into the Book class.
+
+The additional member operator functions, I added to the Book class were necessary for the proper functioning of Collection and OrderedCollection modules. The  ‘operator=’ was used for the assignment of one Book object to another. This operator is essential because it enables the copying of the contents of one Book object into another. Moreover, ‘operator<’ and ‘operator>’ enabled me to carry out comparisons between Book objects as done in the Collection module and sorting book objects in the OrderedCollection module.
+
+Q. In reflection, explain why these functions cannot be queries, even though they do not change value.
+
+According to me, getSmallestItem() and getLargestItem() are not considered query functions because they provide information that can change over time. Query functions typically return constant and unchanging properties of an object each time they are called regardless of the object’s state.
+
+Q. What is the reason for defining the class objects outside the class definition?
+
+In this workshop, I defined class objects like `m_smallestItem` and `m_largestItem` outside the class definition to achieve two key objectives within the template class context, particularly in the case of the `Collection` class. Firstly, it provided these objects global scope, making them accessible to all instances of the class. This proved vital when I needed to maintain uniform characteristics, such as tracking the smallest and largest items, consistently across all instances. Secondly, by placing these objects externally, I ensured they could be specialized for different data types or values while still resembling the entire class template. This arrangement allowed me to customize their behavior to meet specific requirements for various specialized cases, all while adhering to the design principles of template classes. 
+
+Q. What is the reason for specializing the definition of m_smallestItem and m_largestItem objects for Book and 10.
+
+Since in this workshop, we are dealing with book objects primarily, so initializing ‘m_smallestItem’ and ‘m_largestItem’ for Book with specific book data ensures that these objects represent meaningful data for books. It ensures that the collection's smallest and largest items align with the semantics of book data. Whereas the 10 represents the maximum capacity of the collection. Therefore, by specializing these objects, you can provide custom initial values that make sense for the specialized cases.
+
+Q. m_smallestItem and m_largestItem objects are also initialized for Book and 72. Is this initilization necessary? Why?
+
+As far as I know, this initialization is essential for several reasons. Firstly, it ensures that these objects start with meaningful values, promoting predictability and consistency in the code. Without initialization, these objects might contain arbitrary or uninitialized data, leading to unexpected behavior. Secondly, it represents a form of template specialization, tailoring the behavior of these objects to the unique requirements of the `Book` and `72` scenario. Additionally, it prevents potential undefined behavior when using or comparing these objects later in the program. Lastly, in the context of the `Collection` class, where maintaining the smallest and largest items is critical, initialization guarantees that these objects correctly represent relevant data, aligning with the semantics of the specialized case and ensuring the class's functionality operates as intended.
+

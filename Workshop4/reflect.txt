@@ -1,0 +1,73 @@
+*****************************************************************************
+                               Reflection
+Full Name  :  Sakshi Sakshi
+Student ID#:  102602222
+
+Authenticity Declaration:
+I declare this submission is the result of my own work and has not been
+shared with any other student or 3rd party content provider. This submitted
+piece of work is entirely of my own creation.
+*****************************************************************************
+
+
+Q1. the difference between the implementations of a composition and an aggregation with reference to the classes used in this workshop. Note that both classes CheeseShop and CheeseParty have an attribute of type const Cheese** and yet they are in different relationships with class Cheese. 
+
+Ans. Both CheeseShop and CheeseParty have an attribute of type const Cheese**, which is a collection of pointers to Cheese objects.
+However, CheeseShop uses composition because it owns and manages the memory for the const Cheese** m_cheeseArray. It's responsible for creating and destroying the Cheese objects in its collection. When a CheeseShop object is destroyed, it deletes the dynamically allocated Cheese objects.
+Code: 
+void CheeseShop::clearCheeses() {
+        for (size_t i = 0; i < m_numCheeses; ++i) {
+            delete m_cheeseArray[i]; 
+        }
+        delete[] m_cheeseArray; 
+        m_cheeseArray = nullptr;
+        m_numCheeses = 0;
+    }
+Whereas, CheeseParty uses aggregation because it stores pointers to Cheese objects without ownership. It doesn't create or destroy Cheese objects. When a CheeseParty object is destroyed, it doesn't delete the Cheese objects; it simply releases the memory for the pointers.
+Code:
+void CheeseParty::clearCheeses() {
+		delete[] m_cheeseArray;
+		m_cheeseArray = nullptr;
+		m_numCheeses = 0;
+	}
+
+
+Q2. Discuss the difference between the implementations of move and copy functions in a composition and an aggregation with reference to the classes used in this workshop.
+
+Ans. The logic for move functions is quite similar for both aggregation and compositon within classes in this workshop except how the implementation of their destructor. However, I noticed in CheeseParty, the copy assignment operator directly assigns pointers to Cheese objects from the other object's array to its own array. It doesn't create new copies of the Cheese objects. This means that both the CheeseParty and the other object may point to the same Cheese objects. This behavior reflects an aggregation relationship, where CheeseParty is not fully responsible for managing the lifetime of Cheese objects.
+     However, In CheeseShop, the copy assignment operator creates new copies of the Cheese objects from the other object's array using the copy constructor. This ensures that CheeseShop has its own set of Cheese objects, and changes to one CheeseShop instance won't affect the others. This behavior reflects a composition relationship, where CheeseShop fully owns and controls its Cheese objects.
+
+
+
+Q3. Both CheeseShop and CheeseParty classes have an addCheese function, how do they differ in implementation. Why?
+
+Ans. The difference in implementation is based on  the nature of their relationships with the Cheese objects. In the case of CheeseShop, which exhibits composition, the addCheese function creates a new copy of the Cheese object passed as a parameter. This ensures that CheeseShop fully controls and owns its Cheese objects, preventing unintended side effects when modifying the original Cheese object. 
+     Code:
+     CheeseShop& CheeseShop::addCheese(const Cheese& cheese) {
+        const sdds::Cheese** newCheeses = new const sdds::Cheese * [m_numCheeses + 1];  // Here
+
+        for (size_t i = 0; i < m_numCheeses; i++) {
+            newCheeses[i] = m_cheeseArray[i];
+        }
+
+        newCheeses[m_numCheeses] = new Cheese(cheese);
+
+        delete[] m_cheeseArray;
+        m_cheeseArray = newCheeses;
+        m_numCheeses++;
+
+        return *this;
+    }
+     On the other hand, in the case of CheeseParty, which demonstrates aggregation, the addCheese function simply adds a reference (pointer) to the existing Cheese object to its collection. This allows CheeseParty to reference Cheese objects without taking full ownership.
+
+Q4. The CheeseShop class doesn't have a removeCheese function like the CheeseParty does. How would you implement one to keep in line with how CheeseShop handles its cheeses? What else would need to change in the project? Use pseudocode to illustrate your idea.
+
+Ans. To add a removeCheese function to the CheeseShop class, I would firstly check if they are any cheeses to remove from the array of cheeses. Then I will count the number of cheeses with weight greater than 0.
+     Then, I will create a new array for the remaining valid cheeses. Then I will copy only the valid cheeses which have weight greater than 0. Then I will call the clearcheeses function to delete the old array and update member variables. Lastly, I will return the updated object.
+
+
+In this workshop, I learnt how to implement the rule of five for classes involving compostion and aggregation relationships. Moreover, I learnt how to parse strings even in a more detailed way. Also, I was introduced to the concept of double pointers. 
+I faced difficulty in implementing the destructors for these classes and therefore, got stuck with getting the required output many times and even faced many memory errors. However, after refering to the class notes and lecture recording, I was able to finally get a hold of the destructor concepts and implement them correctly.
+
+     
+          
