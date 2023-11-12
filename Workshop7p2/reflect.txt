@@ -1,0 +1,71 @@
+*****************************************************************************
+                               Reflection
+Full Name  :  Sakshi Sakshi
+Student ID#:  102602222
+
+Authenticity Declaration:
+I declare this submission is the result of my own work and has not been
+shared with any other student or 3rd party content provider. This submitted
+piece of work is entirely of my own creation.
+*****************************************************************************
+1. List all the STL functions that you have used in this workshop; explain your reasoning for choosing each one, and not another.
+Answer: I used std::accumulate to calculate the total number of cases and deaths.
+        Code: size_t totalWorldCases = std::accumulate(covidArray.begin(), covidArray.end(), (size_t)0, [](const size_t& totalWorldCases, const Covid& theCovid) {
+              return totalWorldCases + theCovid.numCases;
+              });
+        I used std::for_each for iterating through the covidArray to print each case.
+        Code: std::for_each(covidArray.begin(), covidArray.end(), [&out](const Covid& covid) {
+              out << covid << std::endl;
+              });
+        I used std::sort for sorting the covidArray based on a specified field.
+        Code: std::sort(covidArray.begin(), covidArray.end(), [field](const Covid& covid, const Covid& otherCovid) {
+              // Comparison based on the specified field
+              });
+        I used std::any_of for checking if any element in the collection satisfies a condition and returning a boolean value.
+        Code: bool result = std::any_of(covidArray.begin(), covidArray.end(), [&](const Covid& covid) {
+              return (covid.country == country) && (covid.variant == variant) && (covid.numDeaths > deaths);
+              });
+        I used std::copy_if for creating a new list with elements that satisfy a condition by using a Lambda function.
+        Code: std::copy_if(covidArray.begin(), covidArray.end(), std::back_inserter(result), [&](const Covid& theCovid) {
+              return theCovid.numDeaths >= deaths;
+              });
+        To conclude, I tried to use the best algorithm functions I could find from the course notes to establish my tasks and get the desired output.
+
+2. Present the advantages of using STL algorithms vs. implementing the functionality by yourself using loops.
+Answer: Using STL algorithms in C++ offers several advantages over manual loop implementations by enhancing code clarity and reducing complexity. These algorithms simplify common tasks, like in this workshop, for example, iterating through collections, calculating totals, sorting, and filtering elements, making the code more concise and readable. STL algorithms are well-tested by experts, ensuring reliable and efficient operations. They promote code reuse, reducing the risk of errors that might arise in custom loop implementations. Overall, according to me using STL algorithms streamlines code, making it more straightforward and easier to maintain.
+
+3. The function that sorts the collection of objects receives as a parameter the field name to use; this can create errors if the client specifies an invalid field (or misspells it). How would you redesign that function to prevent the client from specifying an invalid string, allowing any error to be detected by the compiler?
+Answer: To prevent the client from specifying an invalid field for sorting, we can use an enumeration (enum) to represent valid fields and add a parameter of this enum type to the sort function.
+        For example: Code: enum class SortBy { Country, Year, Variant };
+                           void CovidCollection::sort(SortBy field) 
+                           {
+                               std::sort(covidArray.begin(), covidArray.end(), [field](const Covid& covid, const Covid& otherCovid)
+			                {
+				                if (field == SortBy::Country) {
+					                if (covid.country == otherCovid.country)
+						                return covid.numDeaths < otherCovid.numDeaths;
+					                return covid.country < otherCovid.country;
+				                }
+				                else if (field == SortBy::Year) {
+					                if (covid.year == otherCovid.year)
+						                return covid.numDeaths < otherCovid.numDeaths;
+					                return covid.year < otherCovid.year;
+				                }
+				                else if (field == SortBy::Variant) {
+					                if (covid.variant == otherCovid.variant)
+						                return covid.numDeaths < otherCovid.numDeaths;
+					                return covid.variant < otherCovid.variant;
+				                }
+                                else 
+                                {
+                                     return false;
+                                }
+	                       });
+                           }
+
+During this workshop, I delved into C++ to build a program that manages COVID-19 case information. I created a list structure to organize details like country, city, variant, and case/death numbers. The process involved creating functions for reading from files, displaying data, and implementing sorting based on various criteria.
+I encountered a few hurdles, particularly dealing with spaces in country and city names. To tackle this, I refined my approach and used getline, substr function, and found a solution. Overall, this workshop offered insights into effective C++ coding and problem-solving.
+
+
+
+

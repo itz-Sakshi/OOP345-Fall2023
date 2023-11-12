@@ -1,0 +1,49 @@
+*****************************************************************************
+                               Reflection
+Full Name  :  Sakshi Sakshi
+Student ID#:  102602222
+
+Authenticity Declaration:
+I declare this submission is the result of my own work and has not been
+shared with any other student or 3rd party content provider. This submitted
+piece of work is entirely of my own creation.
+*****************************************************************************
+
+
+
+
+
+Q. Why do you need to deallocate the dynamically allocated memory in your vector of resources?
+Ans: Vector is a dynamic array in C++ which manages its own memory. However, in this workshop in Directory.h, we are required to declare a vector of pointers to resources objects, therefore the vector in this case, is only responsible for managing the memory of pointers to Resource objects, which implies that the vector does not own the resources themselves. Therefore, we need to deallocate the resource objects explicitly to prevent memory leaks and preventing dangling pointers.
+Code : class Directory : public Resource
+    {
+        std::vector<Resource*> m_contents;
+    public:
+        Directory::~Directory()
+    {
+        for (Resource* resource : m_contents) {
+            delete resource;
+        }
+    }
+    }
+
+Q. To call specific functions for a Directory objects stored in a Resource*, what special C++ operation did you have to do and why?
+Ans: To call specific functions for Directory objects stored in a Resource*, we need to use dynamic casting, specifically 'dynamic_cast'. Dynamic casting is a C++ operation that allows us to perform safe type casting of pointers or references to objects in the inheritance hierarchy. In this workshop, it's used to determine if a Resource pointer points to a Directory or File object. It's important to use dynamic casting to ensure type safety and to avoid errors and undefined behavior when calling functions specific to Directory or File.
+Code : if (std::find(flags.begin(), flags.end(), OpFlags::RECURSIVE) != flags.end() && resource && resource->type() == NodeType::DIR) {
+                Resource* foundResource = dynamic_cast<Directory*>(resource)->find(name, flags);
+                if (foundResource) {
+                    return foundResource;
+                }
+            }
+
+Q. In this workshop you had to use std::vector<sdds::Resource*> to store a collection of filesystem resources as pointers. Could you have used std::vector<sdds::Resource> instead? Justify your answer!
+Ans: In this workshop we had to use std::vector<sdds::Resource*> to store a collection of filesystem resources as pointers. If we has used std::vector<sdds::Resource>, we won't be able to achieve the desired results. Because as I mentioned in the first answer that Vector is a dynamic array in C++ which manages its own memory. However, if we had declared vector as an dynamic array of Resource objects, it would not have been able to accomodate the derived objects such as Directory and File, because they require more memory as they are bigger in size than Resource objects. However, pointers occupy the same space in memory regardless of their size, and moreover, with polymorphism, we can treat pointers to Resource objects as pointers to objects of derived classes like File and Directory. Therefore, using std::vector<sdds::Resource*> with pointers is essential for achieving the required polymorphism, proper memory management, and allowing different derived classes to coexist in the same container. 
+Code : class Directory : public Resource
+    {
+        std::vector<Resource*> m_contents;
+    }
+
+
+Overall, in this workshop, I learnt how to manage polymorphic objects using the vector container of the STL. For instance, in the workshop, we used this to manage both directories and files, even though they are different kinds of things but have some similarities as given in Resource.
+Furthermore, I learned about exception handling. In the context of the workshop, handling exceptions was crucial for reporting and dealing with errors, such as attempting to add duplicate resources to a directory or trying to change to a non-existent directory. Additionally, the workshop taught me about range-based iteration, a powerful feature in C++ that simplifies traversing and operating on elements within a container.  This was my first time using something like that but I liked it and plan on using in the forthcoming workshops also.
+I didn't face any major challenges in doing this workshop because the instructions mentioned on github repository were quite clear and I was able to follow along easily. In summary, this workshop helped me level up my understanding, especially in dealing with different types of objects, taking care of memory, and dealing with memory errors. 
