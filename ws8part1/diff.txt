@@ -1,0 +1,14 @@
+In line number 139 of your output:
+The output should be:
+NOTE: An exception occurred and expected!
+^
+But your output is: 
+
+ ^
+
+Unmatched character details:
+The character in column 2 is supposed to be:
+  [N] ASCII code(78)
+but you printed
+  [Empty Line] ASCII code(0)
+

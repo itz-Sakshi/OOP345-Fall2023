@@ -1,0 +1,54 @@
+*****************************************************************************
+                               Reflection
+Full Name  :  Sakshi Sakshi
+Student ID#:  102602222
+
+Authenticity Declaration:
+I declare this submission is the result of my own work and has not been
+shared with any other student or 3rd party content provider. This submitted
+piece of work is entirely of my own creation.
+*****************************************************************************
+
+1. the advantage that smart pointer syntax provides. Use example from your code to support your explanation.
+Ans. Smart pointers manage their own memory, so we don't need to deallocate memory explicitly in our code and there is no need to add delete statements for resources. It helps to prevent memory leaks and improves code readability and safety.
+Code: For example in excludeRaw function: if (!isBanned) {
+                Profile* newProfile = new Profile(allProfiles[i].m_name, allProfiles[i].m_address, allProfiles[i].m_age);
+                try {
+
+                    newProfile->validateAddress();
+                }
+                catch (...)
+                {
+                    delete newProfile;
+                    throw;
+                }
+                result += newProfile;
+                delete newProfile;
+            }
+      In excludeSmart function: if (!isBanned) {
+                shared_ptr<Profile> newProfile(new Profile(allProfiles[i].m_name, allProfiles[i].m_address, allProfiles[i].m_age));
+                newProfile->validateAddress();
+                result += newProfile;
+            }
+
+2. the difference between raw and smart pointer syntax in your solution.
+Ans. As we can see in my previous answer, the only difference between raw and smart pointer syntax is that when I used the smart pointer, std::shared pointer for Profile object,
+     the memory management was handled automatically, thus, simplifying the code and reducing the risk of memory leaks.
+
+3. look at the output when the profiles are excluded using raw/smart pointers: the objects are duplicated a lot of times (e.g., the object with ID 176 is duplicated into object 177; then object 177 is duplicated into object 180 and 177 gets deleted; object 180 is duplicated into 183 and then is deleted, etc.). Explain why so many copies are created!
+Ans. I believe that the issue of object duplications may arise from the combination of dynamic memory allocation, copying profiles, and manual validation. In this workshop code, dynamic memory is allocated for each profile, and these pointers are stored in the result object. However, the same profile is being copied multiple times, leading to unnecessary duplications.
+
+How would you redesign the application to reduce the number of copies that are made?
+Ans. To reduce the number of copies, we should use move semantics instead of copy semantics. Instead of copying profiles,we should use std::move when adding profiles to the result. This way, ownership is transferred rather than creating unnecessary copies.
+Code: if (!isBanned) {
+        std::shared_ptr<Profile> newProfile = std::make_unique<Profile>(allProfiles[i]);
+        newProfile->validateAddress();
+        result += std::move(newProfile);
+    }
+
+4. The class Profile doesn't provide an explicit move constructor. What happens if in the DataBase you add objects into the collection attribute using std:move()? Do an experiment and report your findings.
+Ans. If I use std::move() when adding objects into the collection attribute of DataBase, ownership of the objects will be transferred, and the original objects are left in a valid but unspecified state. 
+     But because Profile does not have an explicit move constructor, the compiler-generated move constructor will be used.
+     Code: void operator+=(T&& item) {
+        collection.push_back(std::move(item));
+     }
