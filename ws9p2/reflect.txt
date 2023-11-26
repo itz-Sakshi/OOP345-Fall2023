@@ -1,0 +1,20 @@
+*****************************************************************************
+                               Reflection
+Full Name  :  Sakshi Sakshi
+Student ID#:  102602222
+
+Authenticity Declaration:
+I declare this submission is the result of my own work and has not been
+shared with any other student or 3rd party content provider. This submitted
+piece of work is entirely of my own creation.
+*****************************************************************************
+
+Ques: In your reflection, include discussion on your observation of the computation times with three different values of the above parameters, and the number of threads used to do the calculations.
+Ans.  I observed that choosing how long the computer "sleeps" during each iteration has a noticeable impact on how fast our multi-threaded calculations run. When we set a really short sleep duration, like std::this_thread::sleep_for(std::chrono::nanoseconds(1)), it doesn't slow things down much overall. But if we increase the sleep duration, say to std::this_thread::sleep_for(std::chrono::nanoseconds(10)) or std::this_thread::sleep_for(std::chrono::nanoseconds(50)), each step takes longer, potentially making the whole calculation much slower. 
+      The number of threads we use (num_threads) affects how quickly everything gets done. Having more threads can speed things up, but we need to be careful because managing lots of threads comes with some extra work, and making sure they work together smoothly is crucial. So, finding the right balance between how long we wait and how many threads we use is key for making our multi-threaded calculations efficient.
+
+1. Using binary files is beneficial for storing raw data efficiently, especially when dealing with large datasets. In this workshop, it helps in writing and reading data in a compact and fast manner.
+
+2. Binding a function to its arguments is useful for creating function objects with pre-specified arguments. In this workshop, std::bind was employed to pass specific parameters to functions when creating threads, facilitating the parallelization of computations.
+
+3. Multiple threads provide the advantage of parallelism, enabling the execution of multiple tasks concurrently. In this workshop, multi-threading was applied to compute average and variance concurrently, potentially reducing the overall computation time.
