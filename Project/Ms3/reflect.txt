@@ -1,0 +1,18 @@
+*****************************************************************************
+                               Reflection
+Full Name  :  Sakshi Sakshi
+Student ID#:  102602222
+
+Authenticity Declaration:
+I declare this submission is the result of my own work and has not been
+shared with any other student or 3rd party content provider. This submitted
+piece of work is entirely of my own creation.
+*****************************************************************************
+
+Honestly, this project felt like a big adventure, full of challenges that tested my understanding of computer concepts like memory management and pointer manipulation. The first two milestones were relatively easier and less complex than the last one.
+
+The most interesting part in the third milestone was dealing with global queues and making sure different parts of the system could communicate with each other. Using existing tools, like STL algorithms, made the code neat and efficient.
+
+As I went through the project milestones, it felt like putting together pieces of a puzzle. Each part, from Utilities to LineManager, helped me understand how programming principles actually work. I faced most difficulties in writing code for LineManager.cpp, especially in finding the first station. It taught me that writing clear code is crucial, especially when dealing with complex relationships between things.
+
+Looking back, the best part of the semester was completing these milestones. Even though the instructions were a bit unclear for MS3, figuring everything out was like solving a mystery. Building the LineManager constructor was a highlight, and overcoming challenges in functions like attemptToMoveOrder and fill added a sense of accomplishment. It showed me that what I learn in class isn't just theory; it's useful in real projects.
